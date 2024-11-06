@@ -8,12 +8,10 @@
     { 
       "key": "requestPath", 
       "display": "请求地址", 
-      "default": "https://t.leftsite.cn/tts"
     },
     {
       "key": "v", 
       "display": "语音名称", 
-      "default": "en-US-SerenaMultilingualNeural"
     }
   ],
   "language": {
