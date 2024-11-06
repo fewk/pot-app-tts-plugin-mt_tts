@@ -3,7 +3,7 @@ async function tts(text, _lang, options = {}) {
     const { http } = utils;
     const { fetch, Body } = http;
 
-    let { requestPath } = config;
+    let { requestPath, v } = config;  // 从 config 中获取 requestPath 和 v 参数
 
     // 设置请求地址，若没有提供则使用默认值
     if (!requestPath) {
@@ -22,7 +22,10 @@ async function tts(text, _lang, options = {}) {
     // 构建 URL 并附加查询参数
     const url = new URL(requestPath);
     url.searchParams.append('t', text);  // 文本
-    url.searchParams.append('v', '');  // 语音名称 (可选), 默认为 zh-CN-XiaoxiaoMultilingualNeural
+
+    // 设置 v 参数（语音名称），如果用户配置了 v，则使用配置的值，否则留空
+    url.searchParams.append('v', v || '');  // 默认为空字符串，用户可配置
+
     url.searchParams.append('r', '');  // 语速 (可选), 默认为 0
     url.searchParams.append('p', '');  // 语调 (可选), 默认为 0
     url.searchParams.append('o', '');  // 输出格式 (可选), 默认为audio-24khz-48kbitrate-mono-mp3
