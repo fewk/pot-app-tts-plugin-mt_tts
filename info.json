@@ -12,14 +12,14 @@
     },
     {
       "key": "v", 
-      "display": "语言参数", 
-      "default": "${lang}"
+      "display": "语音名称", 
+      "default": "en-US-SerenaMultilingualNeural"
     }
   ],
   "language": {
     "zh_cn": "zh",
     "zh_tw": "zh_HANT",
-    "en": "en-US-SerenaMultilingualNeural",
+    "en": "en",
     "ja": "ja",
     "ko": "ko",
     "fr": "fr",
