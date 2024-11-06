@@ -4,7 +4,18 @@
   "icon": "tm-tts.svg",
   "display": "Mt_TTS",
   "homepage": "https://github.com/fewk/pot-app-tts-plugin-mt_tts",
-  "needs": [{ "key": "requestPath", "display": "请求地址" }],
+  "needs": [
+    { 
+      "key": "requestPath", 
+      "display": "请求地址", 
+      "default": "https://t.leftsite.cn/tts"
+    },
+    {
+      "key": "v", 
+      "display": "语言参数", 
+      "default": "${lang}"
+    }
+  ],
   "language": {
     "zh_cn": "zh",
     "zh_tw": "zh_HANT",
