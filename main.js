@@ -38,10 +38,14 @@ async function tts(text, lang, options = {}) {
 
     // 检查响应状态
     if (res.ok) {
-        // 使用 `arrayBuffer()` 获取音频的二进制数据
-        const audioData = await res.arrayBuffer();
-        return audioData;  // 返回音频数据的二进制形式
+        // 返回二进制数据
+        let result = res.data;
+        if (result) {
+            return result;  // 返回音频数据的二进制形式
+        } else {
+            throw JSON.stringify(result);  // 如果没有音频数据，抛出错误
+        }
     } else {
-        throw new Error(`Http Request Error\nHttp Status: ${res.status}\n${JSON.stringify(res.data)}`);
+        throw `Http Request Error\nHttp Status: ${res.status}\n${JSON.stringify(res.data)}`;
     }
 }
