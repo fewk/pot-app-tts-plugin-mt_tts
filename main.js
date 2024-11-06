@@ -1,4 +1,4 @@
-async function tts(text, lang, options = {}) {
+async function tts(text, _lang, options = {}) {
     const { config, utils } = options;
     const { http } = utils;
     const { fetch, Body } = http;
