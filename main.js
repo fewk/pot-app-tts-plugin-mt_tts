@@ -1,33 +1,39 @@
-async function tts(text, requestPath = "https://t.leftsite.cn/tts") {
-    // 检查 requestPath 是否是有效的 URL，如果不是，抛出错误
-    try {
-        const url = new URL(requestPath);  // 尝试构造一个 URL 对象
-    } catch (e) {
-        throw new Error(`Invalid requestPath: ${requestPath}`);
-    }
+async function tts(text, lang, options = {}) {
+  const { config, utils } = options;
+  const { http } = utils;
+  const { fetch, Body } = http;
 
-    // 构建 URL 查询字符串
-    const url = new URL(requestPath);  // 确保 requestPath 是一个完整的 URL
-    url.searchParams.append('t', text);  // 添加文本参数
-    url.searchParams.append('v', 'en-US-SerenaMultilingualNeural');  // 设置语音
-    url.searchParams.append('r', '0');  // 设置语速
-    url.searchParams.append('p', '0');  // 设置音量等其他参数
-    url.searchParams.append('o', 'audio-24khz-48kbitrate-mono-mp3');  // 设置音频格式
+  let { requestPath, apiKey } = config;  // 获取配置中的请求地址和 API 密钥
 
-    // 发送 GET 请求
-    const res = await fetch(url, {
-        method: "GET",
-    });
+  // 如果没有传入 requestPath，使用默认值
+  if (!requestPath) {
+    requestPath = "https://t.leftsite.cn/tts";
+  }
 
-    // 检查响应状态
-    if (res.ok) {
-        // 假设返回的是音频文件，获取音频数据
-        const audioData = await res.arrayBuffer();
-        const audioBlob = new Blob([audioData], { type: 'audio/mpeg' });  // 这里假设返回的是 MP3 格式
-        const audioUrl = URL.createObjectURL(audioBlob);
-        const audio = new Audio(audioUrl);
-        audio.play();  // 播放音频
-    } else {
-        throw `Http Request Error\nHttp Status: ${res.status}\n${JSON.stringify(res.data)}`;
-    }
+  // 确保 requestPath 是完整的 URL
+  if (!/https?:\/\/.+/.test(requestPath)) {
+    requestPath = `https://${requestPath}`;
+  }
+
+  // 构建请求的 URL，添加文本和语言等查询参数
+  const url = new URL(requestPath);
+  url.searchParams.append('t', text);  // 要转换成语音的文本
+  url.searchParams.append('v', lang);  // 语言参数，例如 'en'、'zh' 等
+  url.searchParams.append('r', '0');  // 设置语速
+  url.searchParams.append('p', '0');  // 设置音量等其他参数
+  url.searchParams.append('o', 'audio-24khz-48kbitrate-mono-mp3');  // 设置音频格式
+
+  // 发送请求获取语音
+  const res = await fetch(url, {
+    method: "GET",
+  });
+
+  // 检查请求是否成功
+  if (res.ok) {
+    // 获取音频数据
+    const audioData = await res.arrayBuffer();
+    return audioData;  // 返回音频字节数组
+  } else {
+    throw new Error(`Http Request Error\nHttp Status: ${res.status}`);
+  }
 }
