@@ -22,10 +22,10 @@ async function tts(text, lang, options = {}) {
     // 构建 URL 并附加查询参数
     const url = new URL(requestPath);
     url.searchParams.append('t', text);  // 文本
-    url.searchParams.append('v', lang);  // 语言
-    url.searchParams.append('r', '0');  // 语速
-    url.searchParams.append('p', '0');  // 音量
-    url.searchParams.append('o', 'audio-24khz-48kbitrate-mono-mp3');  // 音频格式（MP3）
+    url.searchParams.append('v', lang);  // 语音
+    url.searchParams.append('r', '0');  // 语速 (可选), 默认为 0
+    url.searchParams.append('p', '0');  // 语调 (可选), 默认为 0
+    url.searchParams.append('o', 'audio-24khz-48kbitrate-mono-mp3');  // 输出格式 (可选), 默认为audio-24khz-48kbitrate-mono-mp3
 
     // 发起 GET 请求以获取音频数据
     const res = await fetch(url, {
