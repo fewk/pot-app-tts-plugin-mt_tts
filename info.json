@@ -7,11 +7,11 @@
   "needs": [
     { 
       "key": "requestPath", 
-      "display": "请求地址", 
+      "display": "请求地址"
     },
     {
       "key": "v", 
-      "display": "语音名称", 
+      "display": "语音名称"
     }
   ],
   "language": {
