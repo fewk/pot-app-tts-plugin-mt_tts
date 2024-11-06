@@ -1,7 +1,7 @@
 {
   "id": "plugin.com.pot-app.mt_tts",
   "plugin_type": "tts",
-  "icon": "Mt_TTS.svg",
+  "icon": "tm-tts.svg",
   "display": "Mt_TTS",
   "homepage": "https://github.com/fewk/pot-app-tts-plugin-mt_tts",
   "needs": [{ "key": "requestPath", "display": "请求地址" }],
