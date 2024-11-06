@@ -3,11 +3,18 @@ async function tts(text, lang, options = {}) {
     const { tauriFetch } = utils;
     let { requestPath } = config;
 
-    // 如果未定义 requestPath 或为空，则设置为新 URL
-    requestPath = "t.leftsite.cn/tts";
+    // 设置默认请求路径
+    requestPath = requestPath || "https://t.leftsite.cn/tts";
+    
+    // 检查 config.language 是否存在，否则提供默认值
+    const languageMap = config.language || {
+        "en": "en-US-SerenaMultilingualNeural",
+        // 添加其他默认语言映射
+    };
 
-    // 构建 URL，注意 URL 中的参数结构与示例请求一致
-    const url = `${requestPath}?t=${encodeURIComponent(text)}&v=${lang}&r=0&p=0&o=audio-24khz-48kbitrate-mono-mp3`;
+    // 确定语言代码
+    const voice = languageMap[lang] || "en-US-SerenaMultilingualNeural";
+    const url = `${requestPath}?t=${encodeURIComponent(text)}&v=${voice}&r=0&p=0&o=audio-24khz-48kbitrate-mono-mp3`;
 
     const res = await tauriFetch(url);
 
