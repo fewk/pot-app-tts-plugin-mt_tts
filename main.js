@@ -7,7 +7,7 @@ async function tts(text, _lang, options = {}) {
 
     // 设置请求地址，若没有提供则使用默认值
     if (!requestPath) {
-        requestPath = "https://t.leftsite.cn/tts";
+        requestPath = "";
     }
 
     // 确保请求路径是以 https 开头，并处理尾部的 / 符号
