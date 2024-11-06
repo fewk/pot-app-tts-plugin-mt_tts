@@ -22,7 +22,7 @@ async function tts(text, lang, options = {}) {
     // 构建 URL 并附加查询参数
     const url = new URL(requestPath);
     url.searchParams.append('t', text);  // 文本
-    url.searchParams.append('v', lang);  // 语音
+    url.searchParams.append('v', 'en-US-SerenaMultilingualNeural');  // 语音名称，默认为en-US-SerenaMultilingualNeural
     url.searchParams.append('r', '0');  // 语速 (可选), 默认为 0
     url.searchParams.append('p', '0');  // 语调 (可选), 默认为 0
     url.searchParams.append('o', 'audio-24khz-48kbitrate-mono-mp3');  // 输出格式 (可选), 默认为audio-24khz-48kbitrate-mono-mp3
