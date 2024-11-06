@@ -21,17 +21,18 @@ async function tts(text, lang, options = {}) {
   url.searchParams.append('p', '0');  // 音量
   url.searchParams.append('o', 'audio-24khz-48kbitrate-mono-mp3');  // 音频格式（MP3）
 
-  // 请求音频数据
+  // 请求音频数据，确保客户端以二进制形式接收
   const res = await fetch(url, {
     method: "GET",
+    responseType: "Binary",  // 关键是设置为 'Binary' 或适当的响应类型
     headers: {
-      'Accept': 'audio/mpeg'  // 添加此头部以请求 MP3 格式
+      'Accept': 'audio/mpeg'  // 请求音频文件（MP3格式）
     }
   });
 
   if (res.ok) {
-    // 使用 arrayBuffer() 处理音频数据
-    const audioData = await res.arrayBuffer();  // 获取音频的二进制数据（如 MP3 格式）
+    // 返回音频的二进制数据
+    const audioData = await res.arrayBuffer();  // 获取音频的二进制数据
     return audioData;
   } else {
     throw new Error(`Http Request Error\nHttp Status: ${res.status}`);
