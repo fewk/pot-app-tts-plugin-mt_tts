@@ -26,6 +26,7 @@ async function tts(text, lang, options = {}) {
   // 发送请求获取语音
   const res = await fetch(url, {
     method: "GET",
+    responseType: "arraybuffer"  // 设置响应类型为 arraybuffer (二进制数据)
   });
 
   // 检查响应状态
