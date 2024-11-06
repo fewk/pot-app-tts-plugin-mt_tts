@@ -4,7 +4,7 @@ async function tts(text, lang, options = {}) {
     let { requestPath } = config;
 
     // 如果未定义 requestPath 或为空，则设置为新 URL
-    requestPath = "https://t.leftsite.cn/tts";
+    requestPath = "t.leftsite.cn/tts";
 
     // 构建 URL，注意 URL 中的参数结构与示例请求一致
     const url = `${requestPath}?t=${encodeURIComponent(text)}&v=${lang}&r=0&p=0&o=audio-24khz-48kbitrate-mono-mp3`;
